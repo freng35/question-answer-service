@@ -23,5 +23,6 @@ urlpatterns = [
     path('', view.index),
     path('login/', au_views.LoginView.as_view()),
     path('logout/', au_views.LogoutView.as_view()),
+    path('register/', view.RegisterFormView.as_view()),
     path('tmp/', view.tmp)
 ]
