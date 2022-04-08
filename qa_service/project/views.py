@@ -5,13 +5,14 @@ from .models import U
 from django.views.generic.edit import FormView
 from .forms import *
 
+
 def index(request):
     context = {}
     return render(request, 'index.html', context)
 
 
 @login_required
-def tmp(request):
+def tmp(request, user_id):
     t = U
     return render(request, 'tmp.html', {})
 
