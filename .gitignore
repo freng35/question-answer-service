@@ -1,0 +1,4 @@
+qa_service/*/__pycache__/*
+.idea/*
+site_env/*
+qa_service/db.sqlite3
