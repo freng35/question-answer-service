@@ -13,9 +13,11 @@ def index(request):
 
 @login_required
 def profile(request, user_id):
-    user_item = User.objects.get()
-    print(user_item)
-    return render(request, 'profile.html', {})
+    context = {}
+    user_item = User.objects.get(id=user_id)
+    context['c_user'] = user_item
+
+    return render(request, 'profile.html', context)
 
 
 class RegisterFormView(FormView):
@@ -34,5 +36,4 @@ class RegisterFormView(FormView):
             print(form.fields[key])
 
         # Вызываем метод базового класса
-
         return super(RegisterFormView, self).form_valid(form)
