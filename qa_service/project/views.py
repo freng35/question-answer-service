@@ -1,9 +1,9 @@
 from django.shortcuts import render
 from django.http import HttpResponseRedirect
 from django.contrib.auth.decorators import login_required
-from .models import U
 from django.views.generic.edit import FormView
 from .forms import *
+from .models import *
 
 
 def index(request):
@@ -12,9 +12,12 @@ def index(request):
 
 
 @login_required
-def tmp(request, user_id):
-    t = U
-    return render(request, 'tmp.html', {})
+def profile(request, user_id):
+    context = {}
+    user_item = User.objects.get(id=user_id)
+    context['c_user'] = user_item
+
+    return render(request, 'profile.html', context)
 
 
 class RegisterFormView(FormView):
