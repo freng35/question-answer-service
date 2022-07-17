@@ -17,6 +17,8 @@ from django.contrib import admin
 from django.urls import path
 import project.views as view
 from django.contrib.auth import views as au_views
+from django.conf.urls.static import static
+from django.conf import settings
 
 urlpatterns = [
     path('admin/', admin.site.urls),
@@ -24,5 +26,6 @@ urlpatterns = [
     path('login/', au_views.LoginView.as_view()),
     path('logout/', au_views.LogoutView.as_view()),
     path('register/', view.RegisterFormView.as_view()),
-    path('profile/<int:user_id>/', view.profile)
-]
+    path('profile/<int:user_id>/', view.profile),
+    path('profile/<int:user_id>/edit/', view.edit_profile),
+] + static(settings.MEDIA_URL, document_root=settings.MEDIA_ROOT)
