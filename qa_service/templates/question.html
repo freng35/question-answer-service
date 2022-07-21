@@ -1,0 +1,18 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Вопрос №{{ question.id }}</title>
+</head>
+<body>
+{% include 'menu.html' %}
+
+<div class="card text-bg-light mb-3" style="max-width: 58rem; margin-left: 20%; margin-top: 1%">
+  <div class="card-header">Вопрос №{{ question.id }}</div>
+  <div class="card-body">
+    <h5 class="card-title">Тема: {{ question.theme}}</h5>
+    <p class="card-text">Вопрос{{ question.text}}</p>
+  </div>
+</div>
+</body>
+</html>

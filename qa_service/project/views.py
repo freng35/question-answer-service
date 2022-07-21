@@ -60,3 +60,31 @@ class RegisterFormView(FormView):
             print(form.fields[key])
 
         return super(RegisterFormView, self).form_valid(form)
+
+
+def create_question(request):
+    context = {}
+
+    if request.method == "POST":
+        form = CreateQuestionFrom(request.POST)
+        if form.is_valid():
+            question_item = Question(
+                user_created=request.user,
+                theme=form.data.get('theme', None),
+                text=form.data.get('text', None),
+            )
+            question_item.save()
+            return HttpResponseRedirect(f'/question/{question_item.id}')
+
+    form = CreateQuestionFrom()
+    context['form'] = form
+
+    return render(request, 'create_question.html', context)
+
+
+def get_question(request, question_id):
+    question_item = Question.objects.get(id=question_id)
+    context = {'question': question_item}
+
+    return render(request, 'question.html', context)
+

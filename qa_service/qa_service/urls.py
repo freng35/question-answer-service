@@ -28,4 +28,6 @@ urlpatterns = [
     path('register/', view.RegisterFormView.as_view()),
     path('profile/<int:user_id>/', view.profile),
     path('profile/<int:user_id>/edit/', view.edit_profile),
+    path('create_question/', view.create_question),
+    path('question/<int:question_id>/', view.get_question),
 ] + static(settings.MEDIA_URL, document_root=settings.MEDIA_ROOT)

@@ -1,6 +1,6 @@
 from django.contrib.auth.forms import UserCreationForm
 from django import forms
-from .models import User, Profile
+from .models import User, Profile, Question
 
 
 class SignUpForm(UserCreationForm):
@@ -29,3 +29,17 @@ class ProfileUpdateForm(forms.ModelForm):
     class Meta:
         model = Profile
         fields = ('biography', 'image')
+
+
+class CreateQuestionFrom(forms.ModelForm):
+    def __init__(self, *args, **kwargs):
+        super(CreateQuestionFrom, self).__init__(*args, **kwargs)
+
+        self.fields['theme'].label = 'Тема'
+        self.fields['text'].label = 'Вопрос'
+        self.fields['text'].widget = forms.Textarea(attrs={'style': 'width: 90%;'})
+
+    class Meta:
+        model = Question
+
+        fields = ('theme', 'text')

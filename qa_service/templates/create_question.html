@@ -1,0 +1,23 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Создание вопроса</title>
+</head>
+<body>
+{% include 'menu.html' %}
+{% load crispy_forms_tags %}
+
+<form method="post" action="" novalidate style="margin-left: 40%; margin-top: 2%">
+    <style>
+        .asteriskField {
+            display: none;
+        }
+    </style>
+    {% csrf_token %}
+    {{ form|crispy }}
+    <input type="submit" class="btn btn-primary mt-4" value="Создать">
+
+</form>
+</body>
+</html>
