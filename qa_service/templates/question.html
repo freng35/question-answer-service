@@ -6,13 +6,50 @@
 </head>
 <body>
 {% include 'menu.html' %}
+{% load crispy_forms_tags %}
 
 <div class="card text-bg-light mb-3" style="max-width: 58rem; margin-left: 20%; margin-top: 1%">
-  <div class="card-header">Вопрос №{{ question.id }}</div>
-  <div class="card-body">
-    <h5 class="card-title">Тема: {{ question.theme}}</h5>
-    <p class="card-text">Вопрос{{ question.text}}</p>
-  </div>
+    <div class="card-header">Вопрос №{{ question.id }}</div>
+    <div class="card-body">
+        <h5 class="card-title">Тема: {{ question.theme}}</h5>
+        <p class="card-text">Вопрос: {{ question.text}}</p>
+    </div>
+    <div class="card-header">Создатель: <a href="/profile/{{ question.user_created.id }}/"> {{ question.user_created.username }} </a></div>
+    <div class="card-header">Дата: {{ question.date }} </div>
+    <form method="post" class="hr" action="/question/{{question.id}}/like/" style="float: left; margin: 0px;">
+        {% csrf_token %}
+
+        {% if liked %}
+        <input type="submit" value="♥ {{ likes_count }}" class="btn btn-danger"
+               style="padding: 1px 10px;">
+        {% else %}
+        <input type="submit" value="♥ {{ likes_count }}" class="btn btn-outline-danger"
+               style="padding: 1px 10px;">
+        {% endif %}
+
+    </form>
 </div>
+
+<form method="post" action="" novalidate style="margin-left: 20%; margin-top: 2%">
+    <style>
+        .asteriskField {
+            display: none;
+        }
+    </style>
+    {% csrf_token %}
+    {{ form|crispy }}
+    <input type="submit" class="btn btn-primary mt-4" value="Ответить">
+
+</form>
+
+{% for answer in answers %}
+<div class="card border-secondary mb-3" style="max-width: 58rem; margin-left: 20%; margin-top: 1%; ">
+    <div class="card-header bg-transparent border-secondary">Пользователь <a href="/profile/{{ answer.user_answered.id }}/"> {{ answer.user_answered.username }}</a> отвечает</div>
+    <div class="card-body text-secondary">
+        <p class="card-text">{{ answer.text }}</p>
+    </div>
+    <div class="card-footer bg-transparent border-secondary">Likes</div>
+</div>
+{% endfor %}
 </body>
 </html>

@@ -28,8 +28,7 @@ class Answer(models.Model):
 class Like(models.Model):
     user_from_like = models.ForeignKey(to=User, on_delete=models.CASCADE)
     question = models.ForeignKey(to=Question, on_delete=models.CASCADE)
-    answer = models.ForeignKey(to=Answer, on_delete=models.CASCADE)
-    
+
 
 @receiver(post_save, sender=User)
 def create_user_profile(sender, instance, created, **kwargs):

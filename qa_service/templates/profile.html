@@ -11,17 +11,19 @@
 <div style="margin-right: 40%; margin-left: 40%; margin-top: 5%;">
     <img src="{{MEDIA_URL}}{{ profile.image }}" class="img-thumbnail" alt="Аватарка">
 </div>
+{% if choice == 1 %}
 <div class="card text-center" style="margin: 5%">
+
     <div class="card-header">
         <ul class="nav nav-tabs card-header-tabs">
             <li class="nav-item">
                 <a class="nav-link active" aria-current="true" href="#">Инфо</a>
             </li>
             <li class="nav-item">
-                <a class="nav-link disabled" href="#" >Вопросы</a>
+                <a class="nav-link" href="/profile/{{profile.user.id}}/questions" >Вопросы</a>
             </li>
             <li class="nav-item">
-                <a class="nav-link disabled" href="#">Ответы</a>
+                <a class="nav-link" href="/profile/{{profile.user.id}}/answers">Ответы</a>
             </li>
         </ul>
     </div>
@@ -30,10 +32,78 @@
         <p class="card-text">Имя: {{ profile.user.username }}</p>
         <p class="card-text">Био: {{ profile.biography }}</p>
         {% if user == c_user %}
-            <a href="edit/" class="btn btn-primary">Редактировать</a>
+        <a href="edit/" class="btn btn-primary">Редактировать</a>
         {% endif %}
     </div>
-</div>
 
+</div>
+{% endif %}
+{% if choice == 2 %}
+<div class="card text-center" style="margin: 5%">
+    <div class="card-header">
+        <ul class="nav nav-tabs card-header-tabs">
+            <li class="nav-item">
+                <a class="nav-link"href="/profile/{{profile.user.id}}">Инфо</a>
+            </li>
+            <li class="nav-item">
+                <a class="nav-link active" aria-current="true" href="/profile/{{profile.user.id}}/questions" >Вопросы</a>
+            </li>
+            <li class="nav-item">
+                <a class="nav-link" href="/profile/{{profile.user.id}}/answers">Ответы</a>
+            </li>
+        </ul>
+    </div>
+    <div class="card-body">
+        {% for item in questions %}
+        <div class="card">
+            <div class="card-header">
+                Вопрос №{{ item.id }}
+            </div>
+            <div class="card-body">
+                <h5 class="card-title">Тема: {{ item.theme }}</h5>
+                <p class="card-text">Вопрос: {{ item.text }}</p>
+                <a href="/question/{{ item.id }}/" class="btn btn-primary">Перейти к вопросу</a>
+            </div>
+        </div>
+        {% endfor %}
+    </div>
+
+</div>
+{% endif %}
+{% if choice == 3 %}
+<div class="card text-center" style="margin: 5%">
+
+    <div class="card-header">
+        <ul class="nav nav-tabs card-header-tabs">
+            <li class="nav-item">
+                <a class="nav-link"  href="/profile/{{profile.user.id}}">Инфо</a>
+            </li>
+            <li class="nav-item">
+                <a class="nav-link" href="/profile/{{profile.user.id}}/questions" >Вопросы</a>
+            </li>
+            <li class="nav-item">
+                <a class="nav-link active" aria-current="true" href="/profile/{{profile.user.id}}/answers">Ответы</a>
+            </li>
+        </ul>
+    </div>
+    <div class="card-body">
+        {% for item in answers %}
+        <div class="card">
+            <div class="card-header">
+                Ответ на вопрос №{{ item.question.id }}
+            </div>
+            <div class="card-body">
+                <h5 class="card-title">Тема: {{ item.question.theme }}</h5>
+                <p class="card-text">Вопрос: {{ item.question.text }}</p>
+                <a href="/question/{{ item.id }}/" class="btn btn-primary">Перейти к вопросу</a>
+            </div>
+        </div>
+        {% endfor %}
+    </div>
+
+</div>
+{% endif %}
+<script>
+</script>
 </body>
 </html>

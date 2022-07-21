@@ -31,9 +31,9 @@ class ProfileUpdateForm(forms.ModelForm):
         fields = ('biography', 'image')
 
 
-class CreateQuestionFrom(forms.ModelForm):
+class QuestionForm(forms.ModelForm):
     def __init__(self, *args, **kwargs):
-        super(CreateQuestionFrom, self).__init__(*args, **kwargs)
+        super(QuestionForm, self).__init__(*args, **kwargs)
 
         self.fields['theme'].label = 'Тема'
         self.fields['text'].label = 'Вопрос'
@@ -41,5 +41,16 @@ class CreateQuestionFrom(forms.ModelForm):
 
     class Meta:
         model = Question
-
         fields = ('theme', 'text')
+
+
+class AnswerForm(forms.ModelForm):
+    def __init__(self, *args, **kwargs):
+        super(AnswerForm, self).__init__(*args, **kwargs)
+
+        self.fields['text'].label = 'Ответ'
+        self.fields['text'].widget = forms.Textarea(attrs={'style': 'width: 75%;'})
+
+    class Meta:
+        model = Question
+        fields = ('text', )
