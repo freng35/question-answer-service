@@ -1,4 +1,5 @@
 qa_service/*/__pycache__/*
+project/migrations/*
 .idea/*
 site_env/*
 qa_service/db.sqlite3
