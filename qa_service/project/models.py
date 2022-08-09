@@ -18,6 +18,18 @@ class Question(models.Model):
     theme = models.CharField(max_length=200, null=False)
     text = models.CharField(max_length=3000, null=False)
 
+    def likes(self):
+        return Like.objects.filter(question=self)
+
+    def amount_of_likes(self):
+        return len(self.likes())
+
+    def answers(self):
+        return Answer.objects.filter(question=self)
+
+    def amount_of_answers(self):
+        return len(self.answers())
+
 
 class Answer(models.Model):
     user_answered = models.ForeignKey(to=User, on_delete=models.CASCADE)
@@ -28,6 +40,7 @@ class Answer(models.Model):
 class Like(models.Model):
     user_from_like = models.ForeignKey(to=User, on_delete=models.CASCADE)
     question = models.ForeignKey(to=Question, on_delete=models.CASCADE)
+
 
 
 @receiver(post_save, sender=User)

@@ -15,40 +15,34 @@
 <div style="margin-right: 20%; margin-left: 20%; margin-top: 5%">
     <div>
         <h3 style="text-align: center">Поиск вопросов</h3>
-        <form class="d-flex" style="margin-bottom: 5%">
-            <input class="form-control me-2" type="search" placeholder="Search" aria-label="Search">
-            <button class="btn btn-outline-success" type="submit">Search</button>
+        <form class="d-flex" style="margin-bottom: 5%" method="post" novalidate action="">
+            {% csrf_token %}
+            {{ form }}
+            <button class="btn btn-outline-success" type="submit">Поиск</button>
         </form>
         <h4 style="text-align: center; margin: 2%">Топ запросов</h4>
     </div>
 
+    {% for item in questions %}
+    {% for question in item %}
     <div class="card text-center" style="margin-bottom: 2%">
         <div class="card-header">
-            Вопрос №1
+            Вопрос №{{ question.id }}
         </div>
         <div class="card-body">
-            <h5 class="card-title">Прога питон</h5>
-            <p class="card-text">как прогать?</p>
-            <a href="#" class="btn btn btn-outline-secondary">Перейти к вопросу</a>
+            <h5 class="card-title">{{ question.theme }}</h5>
+            <p class="card-text">{{ question.text }}</p>
+            <a href="/question/{{question.id}}/" class="btn btn btn-outline-secondary">Перейти к вопросу</a>
         </div>
         <div class="card-footer text-muted">
-            11 ответов
-        </div>
-    </div>
-
-    <div class="card text-center" style="margin-bottom: 2%">
-        <div class="card-header">
-            Вопрос №2
-        </div>
-        <div class="card-body">
-            <h5 class="card-title">с++</h5>
-            <p class="card-text">с++ норм?</p>
-            <a href="#" class="btn btn-outline-secondary">Перейти к вопросу</a>
+            {{ question.amount_of_likes }} лайков
         </div>
         <div class="card-footer text-muted">
-            5 ответов
+            {{ question.amount_of_answers }} ответов
         </div>
     </div>
+    {% endfor %}
+    {% endfor %}
 
 </div>
 
