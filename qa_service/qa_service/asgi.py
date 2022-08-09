@@ -1,5 +1,5 @@
 """
-ASGI config for qa_service project.
+ASGI config for qa_service main.
 
 It exposes the ASGI callable as a module-level variable named ``application``.
 

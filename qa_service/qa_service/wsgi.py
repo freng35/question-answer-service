@@ -1,5 +1,5 @@
 """
-WSGI config for qa_service project.
+WSGI config for qa_service main.
 
 It exposes the WSGI callable as a module-level variable named ``application``.
 
